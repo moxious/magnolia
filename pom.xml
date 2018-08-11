@@ -20,19 +20,21 @@
             <groupId>org.graalvm</groupId>
             <artifactId>graal-sdk</artifactId>
             <version>1.0.0-rc5</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.oracle.truffle</groupId>
             <artifactId>truffle-api</artifactId>
             <version>${truffle.version}</version> <!-- or any later version -->
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.oracle.truffle</groupId>
             <artifactId>truffle-dsl-processor</artifactId>
             <version>${truffle.version}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
