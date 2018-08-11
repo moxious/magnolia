@@ -13,9 +13,8 @@ connectors, and other utilities useful for testing.
 3.  Configure your Neo4j server:
 
 ```
-pubsub.provider=google
-pubsub.project=my-google-project-id
-pubsub.topic=some-google-pubsub-topic-id
+magnolia.pubsub.project=my-google-project-id
+magnolia.pubsub.topic=some-google-pubsub-topic-id
 ```
 
 4. Start your Neo4j Server

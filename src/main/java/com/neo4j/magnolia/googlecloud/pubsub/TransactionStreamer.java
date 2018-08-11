@@ -1,4 +1,4 @@
-package com.neo4j.googlecloud.pubsub;
+package com.neo4j.magnolia.googlecloud.pubsub;
 
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.event.TransactionData;

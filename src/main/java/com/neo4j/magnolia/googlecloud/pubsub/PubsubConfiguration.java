@@ -1,4 +1,4 @@
-package com.neo4j.googlecloud.pubsub;
+package com.neo4j.magnolia.googlecloud.pubsub;
 
 import org.neo4j.kernel.configuration.Config;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PubsubConfiguration {
-    public static final String PREFIX = "google.pubsub.";
+    public static final String PREFIX = "magnolia.pubsub.";
     private static Map<String, Object> config = new HashMap<>(10);
 
     public static void initialize(GraphDatabaseAPI db) {

@@ -1,4 +1,4 @@
-package com.neo4j.googlecloud.pubsub;
+package com.neo4j.magnolia.googlecloud.pubsub;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +15,7 @@ import com.google.cloud.pubsub.v1.Publisher;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.ProjectTopicName;
 import com.google.pubsub.v1.PubsubMessage;
-import com.neo4j.googlecloud.serializers.*;
+import com.neo4j.magnolia.googlecloud.serializers.*;
 import org.neo4j.graphdb.*;
 import org.neo4j.kernel.impl.logging.LogService;
 import org.neo4j.logging.Log;

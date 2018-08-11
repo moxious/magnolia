@@ -4,7 +4,7 @@ docker stop neo4j-empty
 
 PASSWORD=admin
 CWD=`pwd`
-NEO4J=neo4j:3.4.4-enterprise
+NEO4J=neo4j:3.4.5-enterprise
 
 docker run --rm --name neo4j-empty --rm \
 	-p 127.0.0.1:7474:7474 \
@@ -14,9 +14,9 @@ docker run --rm --name neo4j-empty --rm \
         --env=NEO4J_dbms_memory_heap_max__size=4G \
 	--env=NEO4J_AUTH=neo4j/admin \
 	--env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
-        -v /Users/davidallen/hax/neo_listens/target:/plugins \
+        -v ./target:/plugins \
         -v $HOME/.google:/google \
-        --env=NEO4J_dbms_security_procedures_unrestricted="com.maxdemarzi.*" \
+        --env=NEO4J_dbms_security_procedures_unrestricted="com.neo4j.magnolia.*" \
         --env=GOOGLE_APPLICATION_CREDENTIALS=/google/testbed-187316-a4da62423f60.json \
 	-t $NEO4J
 
