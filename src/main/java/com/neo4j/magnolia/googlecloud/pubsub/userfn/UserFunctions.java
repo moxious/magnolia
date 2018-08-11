@@ -1,8 +1,8 @@
-package com.neo4j.googlecloud.pubsub.userfn;
+package com.neo4j.magnolia.googlecloud.pubsub.userfn;
 
-import com.neo4j.googlecloud.pubsub.Neo4jPubsubEventType;
-import com.neo4j.googlecloud.pubsub.PubSubConnector;
-import com.neo4j.googlecloud.pubsub.PubSubConnectorPool;
+import com.neo4j.magnolia.googlecloud.pubsub.Neo4jPubsubEventType;
+import com.neo4j.magnolia.googlecloud.pubsub.PubSubConnector;
+import com.neo4j.magnolia.googlecloud.pubsub.PubSubConnectorPool;
 import org.neo4j.graphdb.*;
 import org.neo4j.logging.Log;
 import org.neo4j.procedure.Context;

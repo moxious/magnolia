@@ -1,10 +1,8 @@
-package com.neo4j.googlecloud.pubsub;
+package com.neo4j.magnolia.googlecloud.pubsub;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.pubsub.v1.PubsubMessage;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.neo4j.kernel.impl.logging.LogService;

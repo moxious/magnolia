@@ -1,6 +1,6 @@
-package com.neo4j.googlecloud.pubsub.userfn;
+package com.neo4j.magnolia.googlecloud.pubsub.userfn;
 
-import com.neo4j.googlecloud.pubsub.AbstractPubsubTest;
+import com.neo4j.magnolia.googlecloud.pubsub.AbstractPubsubTest;
 import org.junit.Test;
 import org.neo4j.driver.v1.*;
 

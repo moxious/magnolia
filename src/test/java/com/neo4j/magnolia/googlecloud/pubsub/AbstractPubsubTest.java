@@ -1,4 +1,4 @@
-package com.neo4j.googlecloud.pubsub;
+package com.neo4j.magnolia.googlecloud.pubsub;
 
 import org.junit.*;
 import org.neo4j.driver.v1.*;
@@ -18,7 +18,7 @@ public class AbstractPubsubTest {
             .withConfig("google.pubsub.topic", topic)
             .withConfig("google.pubsub.project", project)
             .withFixture(cypherFixture)
-            .withFunction(com.neo4j.googlecloud.pubsub.userfn.UserFunctions.class);
+            .withFunction(com.neo4j.magnolia.googlecloud.pubsub.userfn.UserFunctions.class);
     protected static Driver driver;
 
     @BeforeClass
