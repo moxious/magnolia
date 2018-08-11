@@ -37,7 +37,6 @@ public class ValueAdapter {
             return result;
         }
 
-        if (v.isProxyObject())
         if (v.isBoolean()) return v.asBoolean();
         if (v.isNumber()) return v.asFloat();
         if (v.isString()) return v.asString();

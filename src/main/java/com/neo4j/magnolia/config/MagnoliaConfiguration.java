@@ -6,6 +6,7 @@ import org.neo4j.kernel.configuration.Config;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,10 @@ public class MagnoliaConfiguration {
         MagnoliaConfiguration conf = mapper.readValue(new File(filename), MagnoliaConfiguration.class);
         System.out.println("Loaded Magnolia Configuration from " + filename + ": " + conf);
         config = conf;
+
+        DirectoryWatcher watcher = new DirectoryWatcher(config.getBasePath());
+        new Thread(watcher).start();
+
         return config;
     }
 

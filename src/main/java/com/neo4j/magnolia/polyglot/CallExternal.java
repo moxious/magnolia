@@ -64,12 +64,8 @@ public class CallExternal {
                 throw new RuntimeException("No such dynamic magnolia function by the name " + externalFn);
             }
 
-            log.info("Loading magnolia function by name " + externalFn + " registered under " + config);
             ExternalFn fn = new ExternalFn(config);
-            Object adapted = ValueAdapter.convert(fn.invoke(arguments, db, log));
-
-            log.info("Adapted object is " + adapted + " of class " + (adapted != null ? adapted.getClass() : null));
-            return adapted;
+            return ValueAdapter.convert(fn.invoke(arguments, db, log));
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
