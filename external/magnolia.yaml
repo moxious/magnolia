@@ -1,6 +1,13 @@
 # Details of magnolia functions
 ---
+basePath: "/plugins/magnolia"
 functions:
+  - name: demo-neo4j-api
+    file: demo-neo4j-api.js
+    language: js
+  - name: echo
+    file: echo.js
+    language: js
   - name: first
     file: first.js
     language: js

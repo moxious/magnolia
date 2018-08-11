@@ -22,7 +22,7 @@ public class ExternalFnConfig {
     }
 
     public String toString() {
-        return "name: " + getName() + "\n" + "file: " + getFile() + "\n" + "language: " + getLanguage() + "\n";
+        return "ExternalFnConfig { name: " + getName() + ", file: " + getFile() + ", language: " + getLanguage() + " }\n";
     }
 
     public String getLanguage() {

@@ -3,15 +3,13 @@ const graph = Interop.import('graph');
 const log = Interop.import('log');
 
 function main() { 
+   if (log) {
+      console.log(log);
+      log.info('JavaScript functions can call Java loggers!');
+   }
+
    console.log('JS is alive and is processing ', args);
-   return { 
-     id: args.id, 
-     text: args.text, 
-     arr: args.arr, 
-     gimme: args.gimme ? args.gimme() : null,
-     graph: graph,
-     log: log
-   }; 
+   return true; 
 } 
 
 main();
