@@ -2,3 +2,5 @@
 *.iml
 target
 dependency-reduced-pom.xml
+graalvm-ce-1.0.0-rc5
+graalvm*.tar.gz

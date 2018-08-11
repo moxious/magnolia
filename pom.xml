@@ -12,9 +12,29 @@
         <neo4j.version>3.4.4</neo4j.version>
         <googleapi.version>1.37.1</googleapi.version>
         <jackson.version>2.9.0</jackson.version>
+        <truffle.version>0.30</truffle.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.graalvm</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>1.0.0-rc5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>${truffle.version}</version> <!-- or any later version -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle.truffle</groupId>
+            <artifactId>truffle-dsl-processor</artifactId>
+            <version>${truffle.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
@@ -50,6 +70,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 

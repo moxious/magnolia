@@ -1,0 +1,9 @@
+# Details of magnolia functions
+---
+functions:
+  - name: first
+    file: first.js
+    language: js
+  - name: second
+    file: second.py
+    language: python

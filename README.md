@@ -1,6 +1,14 @@
 Magnolia
 ===========
 
+## GraalVM Setup
+
+- Download the latest community graalvm, and unzip it in this directory.
+- Run `./graalvm-ce-1.0.0-rc5/Contents/Home/bin/gu install python` to install python support.
+- Configure your IDE to use GraalVM in that path as the JDK for building this project.
+
+## PubSub
+
 Neo4j server plugin for streaming node and edge messages to pub/sub
 connectors, and other utilities useful for testing.
 
