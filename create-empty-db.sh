@@ -20,7 +20,7 @@ docker run --rm --name neo4j-empty --rm \
 	--env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
         -v `pwd`/target:/plugins \
         -v $HOME/.google:/google \
-        --env=NEO4J_dbms_security_procedures_unrestricted="magnolia.*,google.*" \
+        --env=NEO4J_dbms_security_procedures_unrestricted="magnolia.*,google.*,com.neo4j.magnolia.*" \
         --env=NEO4J_magnolia_configuration=/plugins/magnolia/magnolia.yaml \
         --env=NEO4J_magnolia_pubsub_project=testbed-187316" \
         --env=NEO4J_magnolia_pubsub_topic=tmp" \

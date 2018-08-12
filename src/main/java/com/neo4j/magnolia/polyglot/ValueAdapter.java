@@ -5,6 +5,8 @@ import org.graalvm.polyglot.Value;
 import java.util.*;
 
 public class ValueAdapter {
+    public static final List<String> blacklist = Arrays.asList("class", "constructor", "caller", "prototype", "__proto__");
+
     /**
      * Graal VM polyglot values can't be converted to Neo4j AnyValues, so this is a shim converter to cover a number
      * of cases.
@@ -19,9 +21,7 @@ public class ValueAdapter {
         }
 
         Set<String> memberKeys = v.getMemberKeys();
-        System.out.println("ValueConverter: member keys are " + memberKeys);
 
-        List<String> blacklist = Arrays.asList("class", "constructor", "caller", "prototype", "__proto__");
 
         // Nested map case.
         if (!memberKeys.isEmpty()) {

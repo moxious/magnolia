@@ -2,20 +2,13 @@ package com.neo4j.magnolia.polyglot;
 
 import com.neo4j.magnolia.config.ExternalFnConfig;
 import com.neo4j.magnolia.config.MagnoliaConfiguration;
-import org.graalvm.polyglot.Value;
 import org.neo4j.graphdb.*;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import org.neo4j.logging.Log;
-import org.neo4j.procedure.Context;
-import org.neo4j.procedure.Description;
-import org.neo4j.procedure.Name;
-import org.neo4j.procedure.UserFunction;
-import org.neo4j.values.AnyValue;
+import org.neo4j.procedure.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CallExternal {
     @Context public GraphDatabaseService db;
@@ -37,17 +30,11 @@ public class CallExternal {
         return ValueAdapter.convert(fn.invoke(arguments, db, log));
     }
 
-    @UserFunction("magnolia.listFunctions")
-    @Description("RETURN magnolia.listFunctions() | show a list of registered dynamic functions")
-    public Object listFunctions() throws IOException {
+    @Procedure(mode = Mode.READ)
+    @Description("CALL magnolia.listFunctions() | show a list of registered dynamic functions")
+    public Stream<ExternalFnConfig> listFunctions() throws IOException {
         initializeIfNeeded();
-        return MagnoliaConfiguration.getConfig().getFunctions().stream().map(item -> {
-            Map<String,String> c = new HashMap<String,String>();
-            c.put("name", item.getName());
-            c.put("lang", item.getLanguage());
-            c.put("file", item.getFile());
-            return c;
-        }).collect(Collectors.toList());
+        return MagnoliaConfiguration.getConfig().getFunctions().stream();
     }
 
     @UserFunction("magnolia.fn")

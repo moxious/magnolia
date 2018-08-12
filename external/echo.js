@@ -3,8 +3,8 @@ const graph = Interop.import('graph');
 const log = Interop.import('log');
 
 function main() { 
-   console.log('JS is alive and is processing ', args, ' in ', process.cwd());
+   console.log('Echo function is running!');
    return args;
 } 
-
+console.log('foo');
 main();

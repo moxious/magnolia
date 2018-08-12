@@ -1,9 +1,9 @@
 package com.neo4j.magnolia.config;
 
 public class ExternalFnConfig {
-    private String name;
-    private String file;
-    private String language = "js";
+    public String name;
+    public String file;
+    public String language = "js";
 
     public String getFile() {
         return file;
@@ -31,5 +31,18 @@ public class ExternalFnConfig {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public int hashCode() {
+        return file.hashCode();
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        ExternalFnConfig other = (ExternalFnConfig) o;
+
+        return getName().equals(other.getName()) &&
+                getLanguage().equals(other.getLanguage()) &&
+                getFile().equals(other.getFile());
     }
 }
