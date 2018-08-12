@@ -6,9 +6,9 @@ PASSWORD=admin
 CWD=`pwd`
 NEO4J=neo4j-graal:3.3.5-enterprise
 
-rm -rf target/original-*.jar target/external
+rm -rf target/original-*.jar target/magnolia
 mkdir target/magnolia
-cp -r external/* target/magnolia
+cp -r magnolia-examples/* target/magnolia
 
 docker run --rm --name neo4j-empty --rm \
 	-p 127.0.0.1:7474:7474 \
