@@ -2,6 +2,7 @@ package com.neo4j.magnolia.polyglot;
 
 import com.neo4j.magnolia.config.ExternalFnConfig;
 import com.neo4j.magnolia.config.MagnoliaConfiguration;
+import org.graalvm.polyglot.Value;
 import org.neo4j.graphdb.*;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import org.neo4j.logging.Log;
@@ -30,11 +31,57 @@ public class CallExternal {
         return ValueAdapter.convert(fn.invoke(arguments, db, log));
     }
 
-    @Procedure(mode = Mode.READ)
-    @Description("CALL magnolia.listFunctions() | show a list of registered dynamic functions")
-    public Stream<ExternalFnConfig> listFunctions() throws IOException {
+
+    @Procedure(mode = Mode.READ, name="magnolia.list")
+    @Description("CALL magnolia.list() | show a list of registered dynamic functions")
+    public Stream<ExternalFnConfig> list() throws IOException {
         initializeIfNeeded();
-        return MagnoliaConfiguration.getConfig().getFunctions().stream();
+
+        Stream <ExternalFnConfig> fStream = MagnoliaConfiguration.getConfig().getFunctions().stream();
+        Stream <ExternalFnConfig> pStream = MagnoliaConfiguration.getConfig().getProcedures().stream();
+
+        return Stream.concat(pStream, fStream);
+    }
+
+    public class ResultContainer {
+        public Object result;
+        public ResultContainer(Object thingy) {
+            result = thingy;
+        }
+    }
+
+    @Procedure(name = "magnolia.proc", mode = Mode.WRITE)
+    @Description("CALL magnolia.proc('procname', arguments) | call a magnolia procedure by name, with a given argument")
+    public Stream<ResultContainer> proc(final @Name("procName") String procName, final @Name("arguments") Object arguments) throws IOException {
+        initializeIfNeeded();
+
+        try {
+            log.info("Inside of proc, looking for " + procName);
+            initializeIfNeeded();
+            // Look up function, instantiate, run, and return its results.
+            ExternalFnConfig config = MagnoliaConfiguration.getConfig().getProcedureByName(procName);
+
+            if (config == null) {
+                throw new RuntimeException("No such dynamic magnolia function by the name " + procName);
+            }
+
+            ExternalFn fn = new ExternalFn(config);
+
+            Value v = fn.invoke(arguments, db, log);
+
+            // Procedures must return strings, so we have to check this proc did the right thing.
+            assert(v.isHostObject());
+            Object result = v.asHostObject();
+            assert (result instanceof java.util.stream.Stream);
+
+            // Map these into result containers as a type hack around the uncertainty of what comes back
+            // from the dynamic procedure.  Unfortunately neo4j procs require a stream of concrete types,
+            // and this is how we force the issue.
+            return ((Stream)result).map(obj -> new ResultContainer(obj));
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            throw exc;
+        }
     }
 
     @UserFunction("magnolia.fn")

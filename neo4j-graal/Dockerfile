@@ -20,6 +20,9 @@ RUN ln -s /var/lib/neo4j/import /import
 RUN ln -s /var/lib/neo4j/metrics /metrics
 RUN ln -s /var/lib/neo4j/conf /conf
 
+# Install graalvm support for python
+RUN gu install python
+
 EXPOSE 7474 7473 7687
 
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]

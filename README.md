@@ -18,6 +18,10 @@ You can examine the `create-empty-db.sh` script for examples of how to run with 
 Write a `magnolia.yaml` file that looks like this:
 
     basePath: "/plugins/magnolia"
+    procedures:
+      - name: my-proc
+        file: my-proc.js
+        language: js
     functions:
       - name: my-function
         file: my-function.js
@@ -41,19 +45,20 @@ specified by
 
 ### List Configured Functions
 
-The `listFunctions()` procedure returns the available registered dynamic functions.
+The `list()` procedure returns the available registered dynamic functions & procedures.
 
-    neo4j> CALL com.neo4j.magnolia.polyglot.listFunctions();
-    +---------------------------------------------------+
-    | name             | file                | language |
-    +---------------------------------------------------+
-    | "demo-neo4j-api" | "demo-neo4j-api.js" | "js"     |
-    | "echo"           | "echo.js"           | "js"     |
-    | "first"          | "first.js"          | "js"     |
-    | "second"         | "second.py"         | "python" |
-    +---------------------------------------------------+
+    neo4j> call com.neo4j.magnolia.polyglot.list();
+    +-----------------------------------------------------------------+
+    | name             | file                | language | type        |
+    +-----------------------------------------------------------------+
+    | "make-node"      | "make-node.js"      | "js"     | "procedure" |
+    | "demo-neo4j-api" | "demo-neo4j-api.js" | "js"     | "function"  |
+    | "echo"           | "echo.js"           | "js"     | "function"  |
+    | "first"          | "first.js"          | "js"     | "function"  |
+    | "second"         | "second.py"         | "python" | "function"  |
+    +-----------------------------------------------------------------+
     
-    4 rows available after 137 ms, consumed after another 6 ms
+    5 rows available after 167 ms, consumed after another 7 ms
 
 ### Call a Registered Function
 

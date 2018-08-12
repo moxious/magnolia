@@ -1,6 +1,10 @@
 # Details of magnolia functions
 ---
 basePath: "/plugins/magnolia"
+procedures:
+  - name: make-node
+    file: make-node.js
+    language: js
 functions:
   - name: demo-neo4j-api
     file: demo-neo4j-api.js

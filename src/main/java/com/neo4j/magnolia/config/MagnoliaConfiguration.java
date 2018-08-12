@@ -29,6 +29,10 @@ public class MagnoliaConfiguration {
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         MagnoliaConfiguration conf = mapper.readValue(new File(filename), MagnoliaConfiguration.class);
+
+        conf.getFunctions().stream().forEach(i -> i.setType("function"));
+        conf.getProcedures().stream().forEach(i -> i.setType("procedure"));
+
         System.out.println("Loaded Magnolia Configuration from " + filename + ": " + conf);
         config = conf;
 
@@ -65,14 +69,7 @@ public class MagnoliaConfiguration {
 
     private String basePath = "/plugins/magnolia";
     private List<ExternalFnConfig> functions;
-
-    public List<ExternalFnConfig> getFunctions() {
-        return functions;
-    }
-
-    public void setFunctions(List<ExternalFnConfig> functions) {
-        this.functions = functions;
-    }
+    private List<ExternalFnConfig> procedures;
 
     /**
      * Get a function by its name
@@ -80,7 +77,22 @@ public class MagnoliaConfiguration {
      * @return the configuration for that function, or null if none exists.
      */
     public ExternalFnConfig getFunctionByName(String name) {
-        Stream<ExternalFnConfig> externalFnConfigStream = functions.stream()
+        return findConfigInList(name, getFunctions());
+    }
+
+    /**
+     * Get a procedure by its name
+     * @param name procedure name, as configured in magnolia.yaml
+     * @return the configuration for that function, or null if none exists.
+     */
+    public ExternalFnConfig getProcedureByName(String name) {
+        return findConfigInList(name, getProcedures());
+    }
+
+    private ExternalFnConfig findConfigInList(String name, List<ExternalFnConfig> list) {
+        if (list == null || list.size() == 0) { return null; }
+
+        Stream<ExternalFnConfig> externalFnConfigStream = list.stream()
                 .filter(fnConfig -> name.equals(fnConfig.getName()));
 
         try {
@@ -93,7 +105,8 @@ public class MagnoliaConfiguration {
     public String toString() {
         return "Magnolia Configuration:\n\n" +
                 "basePath: " + this.basePath + "\n" +
-                "Functions: " + this.functions.stream().map(ExternalFnConfig::toString).collect(Collectors.joining(""));
+                "Functions: " + this.functions.stream().map(ExternalFnConfig::toString).collect(Collectors.joining("")) + "\n" +
+                "Procedures: " + this.procedures.stream().map(ExternalFnConfig::toString).collect(Collectors.joining("")) + "\n";
     }
 
     public static Map<String, Object> subMap(Map<String, ?> params, String prefix) {
@@ -118,5 +131,21 @@ public class MagnoliaConfiguration {
 
     public void setBasePath(String basePath) {
         this.basePath = basePath;
+    }
+
+    public List<ExternalFnConfig> getProcedures() {
+        return procedures;
+    }
+
+    public void setProcedures(List<ExternalFnConfig> procedures) {
+        this.procedures = procedures;
+    }
+
+    public List<ExternalFnConfig> getFunctions() {
+        return functions;
+    }
+
+    public void setFunctions(List<ExternalFnConfig> functions) {
+        this.functions = functions;
     }
 }
