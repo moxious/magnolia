@@ -1,17 +1,34 @@
 Magnolia
 ===========
 
+This repo is a collection of neo4j plugins and experiments of mine.  Right now there are two somewhat different
+things in here.
+
+(1) GraalVM support, and polyglot functions/procedures for cypher.  This lets you write cypher procedures in
+javascript and python, and also do hot-reloading, so you can change the code of a procedure without server restart
+or a new plugin.
+
+(2) Google PubSub support.  Neo4j can either have transaction hooks in place and publish new nodes/edges to
+a PubSub topic, or it can selectively publish only the results of a cypher query, or only certain nodes/edges.
+
+# GraalVM Support
+
 ## Setup
 
 - Download the latest community graalvm, and unzip it in this directory.
 - (Optional) Run `./graalvm-ce-1.0.0-rc5/Contents/Home/bin/gu install python` to install python support.
 - Configure your IDE to use GraalVM in that path as the JDK for building this project.
+- Build the code `mvn clean package -DskipTests`
 - Build the neo4j-graal docker VM locally:
 
     cd neo4j-graal
     docker build -t neo4j-graal:3.3.5-enterprise -f Dockerfile .
 
-## Configure Magnolia
+- Run the "create-empty.sh" script to run the built docker container locally with the magnolia plugin.
+- Connect cypher-shell to localhost (username and password are in create-empty.sh), and then try to run
+`CALL magnolia.list()` or other procedure, see examples below.
+
+## Configure Magnolia for Yourself
 
 You can examine the `create-empty-db.sh` script for examples of how to run with a configuration.
 
@@ -91,10 +108,18 @@ indicates that the code is intended as javascript.
     | 100.0                                             |
     +---------------------------------------------------+
 
-## PubSub
+# Google PubSub Support
 
 Magnolia also contains a Neo4j server plugin for streaming node and edge messages to pub/sub
 connectors, and other utilities useful for testing.
+
+## Why?
+
+Connections through messaging systems are important for implementing layered architectures; for example,
+you can connect existing ElasticSearch systems to PubSub, so by publishing to PubSub, you can easily set
+up database replication to ElasticSearch and add search to an existing graph database.
+
+## Setup
 
 1. Build it:
 
