@@ -9,12 +9,12 @@ functions:
   - name: demo-neo4j-api
     file: demo-neo4j-api.js
     language: js
-  - name: echo
+  - name: echo-js
     file: echo.js
     language: js
+  - name: echo-python
+    file: echo.py
+    language: python
   - name: first
     file: first.js
     language: js
-  - name: second
-    file: second.py
-    language: python
